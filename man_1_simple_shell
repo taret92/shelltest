@@ -1,0 +1,22 @@
+.TH "Simple_shell" "April 2022" "ms"
+.hy
+.SH SIMPLE SIMPLE_SHELL
+.PP
+.hsh [en]
+.SH SYNOPSIS
+.PP
+\f[B]\f[R] [OPTION]
+.PD 0
+.P
+.PD
+
+.SH DESCRIPTION
+\f[B]\f[R] Simple shell - hsh it is a command and type of file that is responsible for executing commands that are read through the terminal.
+
+.B COMMANDS
+A command is an instruction that tells the operating system a task to perform. Some basic commands that are used allow the user to create, modify, delete or move files and folders. To execute commands, a terminal is required to execute them.
+
+.RS
+[\| ls \|]
+The ls command can list file and directory information, including file type, owner, size, modification date and time, permissions, etc.
+
