@@ -11,15 +11,12 @@ int main(int argc, char **argv, char **env)
 	UNUSED(argv);
 	UNUSED(env);
 	{
-	pid_t pid;
-	int read;
-	int tty = 1;
-	int ret;
-	int status;
+	int read;	 
+  int tty = 1;
 	size_t len = 0;
-	char *line, *cpy, *arg, **args;
+	char *line, *cpy, *arg;
 	args_t *arguments = NULL;
-	isatty(STDIN_FILENO) == 0 ? tty = 0 : tty;
+	isatty(STDIN_FILENO) == 0 ? tty = 1 : tty;
 	do {
 		tty == 1 ? write(STDOUT_FILENO, "($) ", 4) : 0;
 		fflush(stdin);
@@ -37,23 +34,6 @@ int main(int argc, char **argv, char **env)
 			}
 			add(&arguments, arg);
 		}
-		/*SACAR EN OTRA FUNCION*/
-		pid = fork();
-		if (pid == -1)
-			return (-1);
-		else if (pid == 0)
-		{
-			args = transform(&arguments);
-			ret = execve(args[0], args, env);
-			if (ret == -1)
-			return (-1);
-		}
-	else
-	{
-		wait(&status);
-	}
-		arguments = NULL;
-
 	} while (1);
 	return (0);
 	}
