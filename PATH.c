@@ -10,7 +10,7 @@ char *PATH(char *comm)
 {
 	extern char **environ;
 	char *dup = NULL; 
-  char **env = environ;
+	char **env = environ;
 	char **funclist = malloc(1024), *funcs = NULL;
 	struct stat stats;
 	int count = 0, i = 0;

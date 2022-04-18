@@ -12,7 +12,7 @@ char **_strtok(char **tokens, char *str, char *delim)
 	char *token2 = NULL;
 	int i = 0;
 
-	tokens = malloc(10 * sizeof(char *));
+	tokens = malloc(512 * sizeof(char *));
 	if (tokens == NULL)
 	{
 		free(tokens);

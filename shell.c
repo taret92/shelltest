@@ -14,8 +14,8 @@ int main (void)
 	size_t j = 0;
 	ssize_t getline2;
 	int i = 0;
-	command built_ins[] = { {"exit"}, 
-				{NULL} };
+	command_t built_ins[] = { {"exit", exit2},
+				{NULL, NULL} };
 	do {
 		str = NULL, tokens = NULL;
 		j = 0;
@@ -26,7 +26,7 @@ int main (void)
 		getline2 = getline(&str, &j, stdin);
 		if (getline2 == -1)
 		{
-      perror("Error: ");
+		perror("Error: ");
 			free(str);
 			if (feof(stdin))
 				return (EXIT_SUCCESS);
@@ -48,7 +48,7 @@ int main (void)
 		{
 			tokens[0] = PATH(tokens[0]);
 			if (tokens[0] == NULL)
-        perror("Error: ");
+		perror("Error: ");
 			else
 				execute(tokens);
 		}
