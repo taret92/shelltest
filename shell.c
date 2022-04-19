@@ -39,10 +39,6 @@ int main(void)
 		}
 
 		printf("El comando es: %s\n", str);
-		if (str == NULL)
-		{
-			continue;
-		}
 		
 		tokens = _strtok(tokens, str, " \t\n");
 		for (i = 0; built_ins[i].name; i++)
