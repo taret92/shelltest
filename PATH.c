@@ -11,7 +11,7 @@ char *PATH(char *comm)
 	extern char **environ;
 	char *dup = NULL; 
 	char **env = environ;
-	char **funclist = malloc(1024), *funcs = NULL;
+	char **funclist = malloc(512 * sizeof(char *)), *funcs = NULL;
 	struct stat stats;
 	int count = 0, i = 0;
 
@@ -20,8 +20,7 @@ char *PATH(char *comm)
 		if ((strncmp("PATH", env[count], 4)) == 0)
 			break;
 	}
-	dup = malloc(strlen(env[count]) + 1);
-	strcpy(dup, env[count]);
+	dup = strdup(env[count]);
 	funcs = strtok(dup, ":=");
 	while (funcs != NULL)
 	{

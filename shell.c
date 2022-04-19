@@ -7,32 +7,43 @@
  * @envp - environment
  */
 
-/*int main(int argc, char *argv[], char *envp[])*/
-int main (void)
+int main(void)
 {
-	char *str, **tokens;
+	char *str = NULL, **tokens;
 	size_t j = 0;
-	ssize_t getline2;
-	int i = 0;
-	command_t built_ins[] = { {"exit", exit2},
-				{NULL, NULL} };
-	do {
+	int i = 0, getline2, tty = 1;
+	command_t built_ins[] = {{"exit", exit2},
+							 {NULL, NULL}};
+	
+	if(isatty(STDIN_FILENO) == 0)
+		tty = 0;
+
+	do
+	{
 		str = NULL, tokens = NULL;
 		j = 0;
 
-		if (write(STDOUT_FILENO, "($) ", 4) == -1)
-			dprintf(STDERR_FILENO, "Error printing Stdout");
+		if (tty == 1)
+			write(STDOUT_FILENO, "($) ", 4);
+		fflush(stdin);
 
 		getline2 = getline(&str, &j, stdin);
 		if (getline2 == -1)
 		{
-		perror("Error: ");
+			perror("Error: ");
 			free(str);
 			if (feof(stdin))
 				return (EXIT_SUCCESS);
 			else
 				return (EXIT_FAILURE);
 		}
+
+		printf("El comando es: %s\n", str);
+		if (str == NULL)
+		{
+			continue;
+		}
+		
 		tokens = _strtok(tokens, str, " \t\n");
 		for (i = 0; built_ins[i].name; i++)
 		{
@@ -42,13 +53,19 @@ int main (void)
 					return (EXIT_SUCCESS);
 			}
 		}
+		if (!tokens[0])
+		{
+			free(tokens);
+			free(str);
+			continue;
+		}
 		if (tokens[0][0] == '/')
 			execute(tokens);
 		else
 		{
 			tokens[0] = PATH(tokens[0]);
 			if (tokens[0] == NULL)
-		perror("Error: ");
+				perror("Error: ");
 			else
 				execute(tokens);
 		}

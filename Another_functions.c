@@ -12,8 +12,8 @@ char **_strtok(char **tokens, char *str, char *delim)
 	char *token2 = NULL;
 	int i = 0;
 
-	tokens = malloc(512 * sizeof(char *));
-	if (tokens == NULL)
+	tokens = malloc(1024 * sizeof(char *));
+	if (tokens == NULL)	
 	{
 		free(tokens);
 		free(str);
@@ -27,7 +27,8 @@ char **_strtok(char **tokens, char *str, char *delim)
 		i++;
 		token2 = strtok(NULL, delim);
 	}
-	tokens[i + 1] = NULL;
+	token2 = NULL;
+	tokens[i] = NULL;
 	free(token2);
 	return (tokens);
 }
@@ -41,5 +42,5 @@ char **_strtok(char **tokens, char *str, char *delim)
 int exit2(char **tokens)
 {
 	free(tokens);
-	return (1);
+	exit (EXIT_SUCCESS);
 }
