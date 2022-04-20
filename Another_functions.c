@@ -13,13 +13,12 @@ char **_strtok(char **tokens, char *str, char *delim)
 	int i = 0;
 
 	tokens = malloc(1024 * sizeof(char *));
-	if (tokens == NULL)	
+	if (tokens == NULL)
 	{
 		free(tokens);
 		free(str);
 		return (NULL);
 	}
-
 	token2 = strtok(str, delim);
 	while (token2 != NULL)
 	{
@@ -42,5 +41,5 @@ char **_strtok(char **tokens, char *str, char *delim)
 int exit2(char **tokens)
 {
 	free(tokens);
-	exit (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

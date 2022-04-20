@@ -9,7 +9,7 @@
 char *PATH(char *comm)
 {
 	extern char **environ;
-	char *dup = NULL; 
+	char *dup = NULL;
 	char **env = environ;
 	char **funclist = malloc(512 * sizeof(char *)), *funcs = NULL;
 	struct stat stats;
@@ -34,8 +34,8 @@ char *PATH(char *comm)
 		}
 		i++;
 		funcs = strtok(NULL, ":");
+		free(dup);
+		free(funclist);
 	}
-	free(dup);
-	free(funclist);
 	return (NULL);
 }
