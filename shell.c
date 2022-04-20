@@ -1,12 +1,11 @@
 #include "main.h"
-
 /**
  * main - shell
  * @argc - number of arguments
  * @argv - arguments
  * @envp - environment
+ * Return: Success!
  */
-
 int main(void)
 {
 	char *str = NULL, **tokens;
@@ -14,12 +13,10 @@ int main(void)
 	int i = 0, getline2, tty = 1;
 	command_t built_ins[] = {{"exit", exit2},
 							 {NULL, NULL}};
-	
-	if(isatty(STDIN_FILENO) == 0)
-		tty = 0;
 
-	do
-	{
+	if (isatty(STDIN_FILENO) == 0)
+		tty = 0;
+	do {
 		str = NULL, tokens = NULL;
 		j = 0;
 
@@ -39,7 +36,7 @@ int main(void)
 		}
 
 		printf("El comando es: %s\n", str);
-		
+
 		tokens = _strtok(tokens, str, " \t\n");
 		for (i = 0; built_ins[i].name; i++)
 		{
